@@ -2,15 +2,30 @@
 #include <HID-Settings.h>
 #pragma once
 
+//todo merge with ks's Button.h
+
+const int key1Function = KEY_F13;
+const int key2Function = KEY_F14;
+const int key3Function = KEY_F15;
+const int key4Function = KEY_F16;
+const int key5Function = KEY_F17;
+const int key6Function = KEY_F18;
+const int key7Function = KEY_F19;
+const int key8Function = KEY_F20;
+const int knobPressFunction = MEDIA_VOLUME_MUTE;
+const int knobClockwiseFunction = MEDIA_VOLUME_UP;
+const int knobCounterClockwiseFunction = MEDIA_VOLUME_DOWN;
+
 // set pin numbers for the eight buttons:
-const int f4Button = 14;
-const int f5Button = 16;
-const int f6Button = 8;
-const int f7Button = 7;
-const int f1Button = 15;
-const int f2Button = 6;
-const int f3Button = 5;
-const int muteButton = 4;
+const int key1Pin = 15;
+const int key2Pin = 6;
+const int key3Pin = 5;
+const int key4Pin = 14;
+const int key5Pin = 16;
+const int key6Pin = 8;
+const int key7Pin = 7;
+const int key8Pin = 18;
+const int mutePin = 4;
 const int CLK = 2;
 const int DT = 3;
 int currentStateCLK;
@@ -19,14 +34,15 @@ int press = false;
 const int delayVal = 400;
 
 void setup() { // initialize the buttons' inputs:
-  pinMode(f4Button, INPUT_PULLUP);
-  pinMode(f5Button, INPUT_PULLUP);
-  pinMode(f6Button, INPUT_PULLUP);
-  pinMode(f7Button, INPUT_PULLUP);
-  pinMode(f1Button, INPUT_PULLUP);
-  pinMode(f2Button, INPUT_PULLUP);
-  pinMode(f3Button, INPUT_PULLUP);
-  pinMode(muteButton, INPUT_PULLUP);
+  pinMode(key1Pin, INPUT_PULLUP);
+  pinMode(key2Pin, INPUT_PULLUP);
+  pinMode(key3Pin, INPUT_PULLUP);
+  pinMode(key4Pin, INPUT_PULLUP);
+  pinMode(key5Pin, INPUT_PULLUP);
+  pinMode(key6Pin, INPUT_PULLUP);
+  pinMode(key7Pin, INPUT_PULLUP);  
+  pinMode(key8Pin, INPUT_PULLUP);  
+  pinMode(mutePin, INPUT_PULLUP);
   pinMode(CLK, INPUT);
   pinMode(DT, INPUT);
   currentStateCLK = digitalRead(CLK); 
@@ -34,59 +50,66 @@ void setup() { // initialize the buttons' inputs:
 }
 
 void loop() {
-  // use the pushbuttons to control the keyboard:
-  if (digitalRead(f7Button) == LOW) {
-    NKROKeyboard.add(KEY_RIGHT_SHIFT);
-    press = true;
-    delay(100);
-  } else {
-    NKROKeyboard.remove(KEY_RIGHT_SHIFT);
-    }
-  
-  if (digitalRead(f4Button) == LOW) {
-    NKROKeyboard.add(KEY_F16);
-    press = true;
-  } else {
-    NKROKeyboard.remove(KEY_F16);
-    }
-    
-  if (digitalRead(f5Button) == LOW) {
-    NKROKeyboard.add(KEY_F17);
-    press = true;
-  } else {
-    NKROKeyboard.remove(KEY_F17);
-    }
-    
-  if (digitalRead(f6Button) == LOW) {
-    NKROKeyboard.add(KEY_F18);
-    press = true;
-  } else {
-    NKROKeyboard.remove(KEY_F18);
-    }
+  // control the keyboard:
         
-  if (digitalRead(f1Button) == LOW) {
-    NKROKeyboard.add(KEY_F13);
+  if (digitalRead(key1Pin) == LOW) {
+    NKROKeyboard.add(key1Function);
     press = true;
   } else {
-    NKROKeyboard.remove(KEY_F13);
+    NKROKeyboard.remove(key1Function);
     }
     
-  if (digitalRead(f2Button) == LOW) {
-    NKROKeyboard.add(KEY_F14);
+  if (digitalRead(key2Pin) == LOW) {
+    NKROKeyboard.add(key2Function);
     press = true;
   } else {
-    NKROKeyboard.remove(KEY_F14);
+    NKROKeyboard.remove(key2Function);
     }
     
-  if (digitalRead(f3Button) == LOW) {
-    NKROKeyboard.add(KEY_F15);
+  if (digitalRead(key3Pin) == LOW) {
+    NKROKeyboard.add(key3Function);
     press = true;
   } else {
-    NKROKeyboard.remove(KEY_F15);
+    NKROKeyboard.remove(key3Function);
+    }
+
+  if (digitalRead(key4Pin) == LOW) {
+    NKROKeyboard.add(key4Function);
+    press = true;
+  } else {
+    NKROKeyboard.remove(key4Function);
     }
     
-  if (digitalRead(muteButton) == LOW) {
-    Consumer.write(MEDIA_VOLUME_MUTE);
+  if (digitalRead(key5Pin) == LOW) {
+    NKROKeyboard.add(key5Function);
+    press = true;
+  } else {
+    NKROKeyboard.remove(key5Function);
+    }
+    
+  if (digitalRead(key6Pin) == LOW) {
+    NKROKeyboard.add(key6Function);
+    press = true;
+  } else {
+    NKROKeyboard.remove(key6Function);
+    }
+
+  if (digitalRead(key7Pin) == LOW) {
+    NKROKeyboard.add(key7Function);
+    press = true;
+  } else {
+    NKROKeyboard.remove(key7Function);
+    }
+
+  if (digitalRead(key8Pin) == LOW) {
+    NKROKeyboard.add(key8Function);
+    press = true;
+  } else {
+    NKROKeyboard.remove(key8Function);
+    }
+    
+  if (digitalRead(mutePin) == LOW) {
+    Consumer.write(knobPressFunction);
     press = true;
   }
   
@@ -95,25 +118,19 @@ void loop() {
    if (currentStateCLK != lastStateCLK  && currentStateCLK == 1){
       // If the outputB state is different to the outputA state, that means the encoder is rotating clockwise
      if (digitalRead(DT) != currentStateCLK) {
-       Consumer.write(MEDIA_VOLUME_DOWN);
+       Consumer.write(knobCounterClockwiseFunction);
      } else {
-       Consumer.write(MEDIA_VOLUME_UP);
+       Consumer.write(knobClockwiseFunction);
      }
    } 
-    lastStateCLK = currentStateCLK; // Updates the f5ious state of the outputA with the current state
+    lastStateCLK = currentStateCLK; // Updates the previous state of the outputA with the current state
    if (press == true) {
    NKROKeyboard.send();
    delay(delayVal);
-   NKROKeyboard.releaseAll();
+   NKROKeyboard.releaseAll(); //TODO figure out way for NKROKeyboard.send() to run when key stops being pressed
    } else {
     delay(1);
    }
    press = false;
 
-//  if (digitalRead(CLK) == LOW) {
-//    Consumer.write(MEDIA_VOLUME_DOWN);
-//  }
-//  if (digitalRead(DT) == LOW) {
-//    Consumer.write(MEDIA_VOLUME_UP);
-//  }
  }
