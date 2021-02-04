@@ -4,30 +4,30 @@
 
 //todo merge with ks's Button.h
 
-const int key1Function = KEY_F13;
-const int key2Function = KEY_F14;
-const int key3Function = KEY_F15;
-const int key4Function = KEY_F16;
-const int key5Function = KEY_F17;
-const int key6Function = KEY_F18;
-const int key7Function = KEY_F19;
-const int key8Function = KEY_F20;
-const int knobPressFunction = MEDIA_VOLUME_MUTE;
-const int knobClockwiseFunction = MEDIA_VOLUME_UP;
-const int knobCounterClockwiseFunction = MEDIA_VOLUME_DOWN;
+const KeyboardKeycode key1Function = KEY_F13;
+const KeyboardKeycode key2Function = KEY_F14;
+const KeyboardKeycode key3Function = KEY_F15;
+const KeyboardKeycode key4Function = KEY_F16;
+const KeyboardKeycode key5Function = KEY_F17;
+const KeyboardKeycode key6Function = KEY_F18;
+const KeyboardKeycode key7Function = KEY_F19;
+const KeyboardKeycode key8Function = KEY_F20;
+const ConsumerKeycode knobPressFunction = MEDIA_VOLUME_MUTE;
+const ConsumerKeycode knobClockwiseFunction = MEDIA_VOLUME_UP;
+const ConsumerKeycode knobCounterClockwiseFunction = MEDIA_VOLUME_DOWN;
 
 // set pin numbers for the eight buttons:
-const int key1Pin = 15;
+const int key1Pin = 5;
 const int key2Pin = 6;
-const int key3Pin = 5;
-const int key4Pin = 14;
+const int key3Pin = 7;
+const int key4Pin = 8;
 const int key5Pin = 16;
-const int key6Pin = 8;
-const int key7Pin = 7;
+const int key6Pin = 14;
+const int key7Pin = 15;
 const int key8Pin = 18;
 const int mutePin = 4;
-const int CLK = 2;
-const int DT = 3;
+const int CLK = 3;
+const int DT = 2;
 int currentStateCLK;
 int lastStateCLK;
 int press = false;  
