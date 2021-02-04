@@ -11,7 +11,7 @@ const KeyboardKeycode key4Function = KEY_F16;
 const KeyboardKeycode key5Function = KEY_F17;
 const KeyboardKeycode key6Function = KEY_F18;
 const KeyboardKeycode key7Function = KEY_F19;
-const KeyboardKeycode key8Function = KEY_F20;
+const KeyboardKeycode key8Function = KEY_RIGHT_SHIFT;
 const ConsumerKeycode knobPressFunction = MEDIA_VOLUME_MUTE;
 const ConsumerKeycode knobClockwiseFunction = MEDIA_VOLUME_UP;
 const ConsumerKeycode knobCounterClockwiseFunction = MEDIA_VOLUME_DOWN;
@@ -103,7 +103,7 @@ void loop() {
 
   if (digitalRead(key8Pin) == LOW) {
     NKROKeyboard.add(key8Function);
-    press = true;
+    //press = true;
   } else {
     NKROKeyboard.remove(key8Function);
     }
